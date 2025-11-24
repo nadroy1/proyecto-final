@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://example.org/pacientes"
+             targetNamespace="http://example.org/pacientes"
+             name="PacientesService">
+
+  <types>
+    <xsd:schema targetNamespace="http://example.org/pacientes">
+      <xsd:complexType name="Paciente">
+        <xsd:sequence>
+          <xsd:element name="cedula" type="xsd:string"/>
+          <xsd:element name="nombre" type="xsd:string"/>
+          <xsd:element name="apellido" type="xsd:string"/>
+          <xsd:element name="telefono" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ArrayOfPaciente">
+        <xsd:sequence>
+          <xsd:element name="paciente" type="tns:Paciente" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="RegistrarPacienteRequest" type="tns:Paciente"/>
+      <xsd:element name="RegistrarPacienteResponse" type="xsd:boolean"/>
+
+      <xsd:element name="BuscarPacientePorCedulaRequest">
+        <xsd:complexType><xsd:sequence>
+          <xsd:element name="cedula" type="xsd:string"/>
+        </xsd:sequence></xsd:complexType>
+      </xsd:element>
+      <xsd:element name="BuscarPacientePorCedulaResponse" type="tns:Paciente"/>
+
+      <xsd:element name="ListarTodosLosPacientesRequest">
+        <xsd:complexType><xsd:sequence/></xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListarTodosLosPacientesResponse" type="tns:ArrayOfPaciente"/>
+
+      <xsd:element name="ModificarPacienteRequest">
+        <xsd:complexType><xsd:sequence>
+          <xsd:element name="cedula" type="xsd:string"/>
+          <xsd:element name="nombre" type="xsd:string"/>
+          <xsd:element name="apellido" type="xsd:string"/>
+          <xsd:element name="telefono" type="xsd:string"/>
+          <xsd:element name="email" type="xsd:string"/>
+        </xsd:sequence></xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ModificarPacienteResponse" type="xsd:boolean"/>
+
+      <xsd:element name="EliminarPacienteRequest">
+        <xsd:complexType><xsd:sequence>
+          <xsd:element name="cedula" type="xsd:string"/>
+        </xsd:sequence></xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EliminarPacienteResponse" type="xsd:boolean"/>
+    </xsd:schema>
+  </types>
+
+  <message name="RegistrarPacienteInput">
+    <part name="parameters" element="tns:RegistrarPacienteRequest"/>
+  </message>
+  <message name="RegistrarPacienteOutput">
+    <part name="parameters" element="tns:RegistrarPacienteResponse"/>
+  </message>
+
+  <message name="BuscarPacientePorCedulaInput">
+    <part name="parameters" element="tns:BuscarPacientePorCedulaRequest"/>
+  </message>
+  <message name="BuscarPacientePorCedulaOutput">
+    <part name="parameters" element="tns:BuscarPacientePorCedulaResponse"/>
+  </message>
+
+  <message name="ListarTodosLosPacientesInput">
+    <part name="parameters" element="tns:ListarTodosLosPacientesRequest"/>
+  </message>
+  <message name="ListarTodosLosPacientesOutput">
+    <part name="parameters" element="tns:ListarTodosLosPacientesResponse"/>
+  </message>
+
+  <message name="ModificarPacienteInput">
+    <part name="parameters" element="tns:ModificarPacienteRequest"/>
+  </message>
+  <message name="ModificarPacienteOutput">
+    <part name="parameters" element="tns:ModificarPacienteResponse"/>
+  </message>
+
+  <message name="EliminarPacienteInput">
+    <part name="parameters" element="tns:EliminarPacienteRequest"/>
+  </message>
+  <message name="EliminarPacienteOutput">
+    <part name="parameters" element="tns:EliminarPacienteResponse"/>
+  </message>
+
+  <portType name="PacientesPortType">
+    <operation name="RegistrarPaciente">
+      <input message="tns:RegistrarPacienteInput"/>
+      <output message="tns:RegistrarPacienteOutput"/>
+    </operation>
+    <operation name="BuscarPacientePorCedula">
+      <input message="tns:BuscarPacientePorCedulaInput"/>
+      <output message="tns:BuscarPacientePorCedulaOutput"/>
+    </operation>
+    <operation name="ListarTodosLosPacientes">
+      <input message="tns:ListarTodosLosPacientesInput"/>
+      <output message="tns:ListarTodosLosPacientesOutput"/>
+    </operation>
+    <operation name="ModificarPaciente">
+      <input message="tns:ModificarPacienteInput"/>
+      <output message="tns:ModificarPacienteOutput"/>
+    </operation>
+    <operation name="EliminarPaciente">
+      <input message="tns:EliminarPacienteInput"/>
+      <output message="tns:EliminarPacienteOutput"/>
+    </operation>
+  </portType>
+
+  <binding name="PacientesBinding" type="tns:PacientesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="RegistrarPaciente">
+      <soap:operation soapAction="http://example.org/pacientes/RegistrarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="BuscarPacientePorCedula">
+      <soap:operation soapAction="http://example.org/pacientes/BuscarPacientePorCedula"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="ListarTodosLosPacientes">
+      <soap:operation soapAction="http://example.org/pacientes/ListarTodosLosPacientes"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="ModificarPaciente">
+      <soap:operation soapAction="http://example.org/pacientes/ModificarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="EliminarPaciente">
+      <soap:operation soapAction="http://example.org/pacientes/EliminarPaciente"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="PacientesService">
+    <documentation>Servicio SOAP de pacientes</documentation>
+    <port name="PacientesPort" binding="tns:PacientesBinding">
+      <soap:address location="http://localhost/proyecto-arquitectura/server/server.php"/>
+    </port>
+  </service>
+</definitions>

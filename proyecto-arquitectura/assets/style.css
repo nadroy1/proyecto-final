@@ -1,0 +1,13 @@
+﻿body { font-family: Arial, sans-serif; margin: 40px; background: #f7f7f7; color: #222; }
+h1 { margin-bottom: 16px; }
+.actions, .form { display: grid; gap: 12px; max-width: 420px; }
+.btn { display: inline-block; padding: 10px 14px; background: #0057e7; color: #fff; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; }
+.btn.secondary { background: #666; }
+.link { background: none; border: none; color: #0057e7; cursor: pointer; text-decoration: underline; padding: 0; }
+.link.danger { color: #c00; }
+.form label { display: grid; gap: 4px; }
+.form input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
+.table th, .table td { border: 1px solid #ddd; padding: 8px; }
+.table th { background: #eee; text-align: left; }
+.alert { margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 4px; }
